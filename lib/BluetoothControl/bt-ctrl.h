@@ -26,12 +26,20 @@ enum BluetoothOpcodes : int {
 class BluetoothControl {
     int tx;
     int rx;
+    bool isInterfaceInitialized;
     SoftwareSerial* interface;
+
+    bool checkInterface();
 public:
     BluetoothControl(int tx, int rx);
 
     void setup() const;
-    BluetoothOpcodes runLoop() const;
+
+    void runATCommand(const char *command) const;
+
+    bool runATCommandAndCheck(const char *command) const;
+
+    BluetoothOpcodes runLoop();
 };
 
 #endif //BT_CTRL_H
